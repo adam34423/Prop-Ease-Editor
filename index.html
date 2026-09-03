@@ -336,17 +336,6 @@
     </div>
 
     <script>
-        if ('serviceWorker' in navigator) {
-            const swCode = `
-                self.addEventListener('install', e => e.waitUntil(self.skipWaiting()));
-                self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
-                self.addEventListener('fetch', e => {
-                    e.respondWith(caches.match(e.request).then(res => res || fetch(e.request).catch(() => caches.match('./'))));
-                });
-            `;
-            const blob = new Blob([swCode], { type: 'text/javascript' });
-            navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(err => console.log('SW registration failed:', err));
-        }
 
         const fileUpload = document.getElementById('fileUpload');
         const mainCanvas = document.getElementById('mainPreviewCanvas');
